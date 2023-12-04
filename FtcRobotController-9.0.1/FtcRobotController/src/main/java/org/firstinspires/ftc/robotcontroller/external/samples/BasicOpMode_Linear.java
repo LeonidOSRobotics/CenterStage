@@ -57,6 +57,7 @@ public class BasicOpMode_Linear extends LinearOpMode {
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor leftDrive = null;
+
     private DcMotor rightDrive = null;
 
     @Override
