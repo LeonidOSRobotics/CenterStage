@@ -16,7 +16,12 @@ public class Robot {
     BNO055IMU imu = null;
 
     // declare constant
-    private final double wheelSize = 4.0; //inches
+    static final double     COUNTS_PER_MOTOR_REV    =  537.7;
+    static final double     WHEEL_DIAMETER_INCHES   = 3.78 ;
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV) /
+                                                    (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double     DRIVE_SPEED             = 1;
+    static final double     TURN_SPEED              = 1;
 
     /* local OpMode members. */
     HardwareMap hwMap = null; //hardware map

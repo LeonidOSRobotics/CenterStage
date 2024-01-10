@@ -13,6 +13,15 @@ public class TestAutonomous extends LinearOpMode {
 
         bot.init(hardwareMap);
 
+        // Send telemetry message to indicate successful Encoder reset
+        telemetry.addData("Starting at",  "%7d :%7d",
+                bot.leftDrive.getCurrentPosition(),
+                bot.rightDrive.getCurrentPosition());
+
+        telemetry.update();
+
+
+
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
