@@ -20,12 +20,16 @@ public class Robot {
     static final double     WHEEL_DIAMETER_INCHES   = 3.78 ;
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV) /
                                                     (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double     DRIVE_SPEED             = 1;
+    static final double     DRIVE_SPEED             = 0.5;
     static final double     TURN_SPEED              = 1;
 
     /* local OpMode members. */
     HardwareMap hwMap = null; //hardware map
     private final ElapsedTime period = new ElapsedTime();
+
+    public ElapsedTime getPeriod() {
+        return period;
+    }
 
     /* Constructor */
     public Robot() {
@@ -37,12 +41,12 @@ public class Robot {
         // Save reference to hardware map
         hwMap = ahwMap;
 
-        leftDrive = hwMap.get(DcMotor.class, "leftDrive");
-        rightDrive = hwMap.get(DcMotor.class, "rightDrive");
-        intake = hwMap.get(Servo.class, "intake");
+        leftDrive = hwMap.get(DcMotor.class, "left_drive");
+        rightDrive = hwMap.get(DcMotor.class, "right_drive");
+        //intake = hwMap.get(Servo.class, "intake");
 
 
-        imu = hwMap.get(BNO055IMU.class, "imu");
+        //imu = hwMap.get(BNO055IMU.class, "imu");
 
         //Temporary Directions for drive train, change after testing if needed.
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -68,6 +72,8 @@ public class Robot {
         leftDrive.setPower(0);
         rightDrive.setPower(0);
     }
+
+
 
     //TELE-OP METHODS
 
