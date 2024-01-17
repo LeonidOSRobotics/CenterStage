@@ -49,8 +49,8 @@ public class Robot {
         //imu = hwMap.get(BNO055IMU.class, "imu");
 
         //Temporary Directions for drive train, change after testing if needed.
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftDrive.setDirection(DcMotor.Direction.FORWARD);
+        rightDrive.setDirection(DcMotor.Direction.REVERSE);
 
 
         // set all motors to zero power
