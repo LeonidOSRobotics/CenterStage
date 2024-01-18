@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class Robot {
@@ -12,7 +13,7 @@ public class Robot {
     //Declare Actuators
     DcMotor leftDrive = null;
     DcMotor rightDrive = null;
-    Servo intake = null;
+    CRServo intake = null;
     BNO055IMU imu = null;
 
     // declare constant
@@ -43,7 +44,7 @@ public class Robot {
 
         leftDrive = hwMap.get(DcMotor.class, "left_drive");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
-        //intake = hwMap.get(Servo.class, "intake");
+        intake = hwMap.crservo.get("con_servo");
 
 
         //imu = hwMap.get(BNO055IMU.class, "imu");
@@ -65,6 +66,8 @@ public class Robot {
         // Set all motors to run with encoders.
         leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        intake.setPower(0);
 
     }
 
