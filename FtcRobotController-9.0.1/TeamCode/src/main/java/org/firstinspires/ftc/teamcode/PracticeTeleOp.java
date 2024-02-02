@@ -74,11 +74,26 @@ public class PracticeTeleOp extends LinearOpMode {
             if (gamepad1.a) {
                 robot.intake.setPower(1);
             }
-            if (gamepad1.b) {
+            else if (gamepad1.b) {
                 robot.intake.setPower(-1);
             }
-            if (gamepad1.atRest()) {
+            else {
                 robot.intake.setPower(0);
+            }
+
+
+            if (gamepad1.left_bumper) {
+                robot.arm.setPower(0.5);
+            }
+            else if (gamepad1.right_bumper) {
+                robot.arm.setPower(-0.5);
+            }
+            else {
+                robot.arm.setPower(0);
+            }
+
+            if(gamepad1.y){
+                robot.launchAirplane();
             }
 
             // Show the wheel power.

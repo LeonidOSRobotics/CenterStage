@@ -13,7 +13,9 @@ public class Robot {
     //Declare Actuators
     DcMotor leftDrive = null;
     DcMotor rightDrive = null;
+    DcMotor arm = null;
     CRServo intake = null;
+    Servo airplane = null;
     BNO055IMU imu = null;
 
     // declare constant
@@ -24,7 +26,10 @@ public class Robot {
     static final double     DRIVE_SPEED             = 0.5;
     static final double     TURN_SPEED              = 1;
 
-    /* local OpMode members. */
+    static final double     UNLAUNCHED              =0.0;
+    static final double     LAUNCHED                =1.0;
+
+    /* local OpMode members.*/
     HardwareMap hwMap = null; //hardware map
     private final ElapsedTime period = new ElapsedTime();
 
@@ -45,6 +50,9 @@ public class Robot {
         leftDrive = hwMap.get(DcMotor.class, "left_drive");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
         intake = hwMap.crservo.get("con_servo");
+        airplane = hwMap.get(Servo.class, "plane");
+        arm = hwMap.get(DcMotor.class, "arm");
+
 
 
         //imu = hwMap.get(BNO055IMU.class, "imu");
@@ -61,13 +69,17 @@ public class Robot {
         // Set all motors to run with encoders.
         leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
 
 
         // Set all motors to run with encoders.
         leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         intake.setPower(0);
+        airplane.setPosition(UNLAUNCHED);
 
     }
 
@@ -79,5 +91,9 @@ public class Robot {
 
 
     //TELE-OP METHODS
+
+    public void launchAirplane(){
+        airplane.setPosition(LAUNCHED);
+    }
 
 }
