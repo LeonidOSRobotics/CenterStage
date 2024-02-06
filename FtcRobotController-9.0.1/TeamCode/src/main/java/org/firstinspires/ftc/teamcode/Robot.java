@@ -15,6 +15,7 @@ public class Robot {
     DcMotor rightDrive = null;
     DcMotor arm = null;
     CRServo intake = null;
+    Servo bucket = null;
     Servo airplane = null;
     BNO055IMU imu = null;
 
@@ -26,8 +27,16 @@ public class Robot {
     static final double     DRIVE_SPEED             = 0.5;
     static final double     TURN_SPEED              = 1;
 
-    static final double     UNLAUNCHED              =0.0;
-    static final double     LAUNCHED                =1.0;
+    static final double     UNLAUNCHED              =0.25;
+    static final double     LAUNCHED                =0.15;
+
+    static final double[]   LOAD                    = {0.0, 0.5};
+    static final double[]   CARRY                   = {0.0, 0.0};
+    static final double[]   PREFLIP                 = {254, 0.8}; //170 DEGREES
+    static final double[]   FLIP                     = {254, 0.5}; //170 DEGREES
+
+
+
 
     /* local OpMode members.*/
     HardwareMap hwMap = null; //hardware map
@@ -50,6 +59,7 @@ public class Robot {
         leftDrive = hwMap.get(DcMotor.class, "left_drive");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
         intake = hwMap.crservo.get("con_servo");
+        bucket = hwMap.get(Servo.class, "bucket");
         airplane = hwMap.get(Servo.class, "plane");
         arm = hwMap.get(DcMotor.class, "arm");
 
@@ -80,6 +90,7 @@ public class Robot {
 
         intake.setPower(0);
         airplane.setPosition(UNLAUNCHED);
+
 
     }
 

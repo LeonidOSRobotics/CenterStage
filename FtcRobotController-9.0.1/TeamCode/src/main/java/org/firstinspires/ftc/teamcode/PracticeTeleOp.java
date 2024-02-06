@@ -96,6 +96,20 @@ public class PracticeTeleOp extends LinearOpMode {
                 robot.launchAirplane();
             }
 
+            if(gamepad2.a){
+                robot.arm.setTargetPosition((int)robot.LOAD[0]);
+                robot.bucket.setPosition(robot.LOAD[1]);
+            }else if(gamepad2.b){
+                robot.arm.setTargetPosition((int)robot.CARRY[0]);
+                robot.bucket.setPosition(robot.CARRY[1]);
+            }else if (gamepad2.x){
+                robot.arm.setTargetPosition((int)robot.PREFLIP[0]);
+                robot.bucket.setPosition(robot.PREFLIP[1]);
+            }else if (gamepad2.y){
+                robot.arm.setTargetPosition((int)robot.FLIP[0]);
+                robot.bucket.setPosition(robot.FLIP[1]);
+            }
+
             // Show the wheel power.
             telemetry.addData("Motors", "left (%.2f), right (%.2f)", leftPower, rightPower);
             telemetry.update();
