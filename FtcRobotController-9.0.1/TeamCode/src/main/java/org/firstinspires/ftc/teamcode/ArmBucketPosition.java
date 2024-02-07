@@ -5,8 +5,23 @@ package org.firstinspires.ftc.teamcode;
  and then a bucket position (Servo Location) */
 public enum ArmBucketPosition {
 
-    LOAD,
-    CARRY,
-    PREFLIP,
-    FLIP
+    LOAD(0, 0.5),
+    CARRY(0, 0.0),
+    PREFLIP(254, 0.8),
+    FLIP(254, 0.5);
+
+    private final int armTicks;
+    private final double bucketPos;
+    ArmBucketPosition(int armTicks, double bucketPos) {
+        this.armTicks = armTicks;
+        this.bucketPos = bucketPos;
+    }
+
+    public int getArmTicks() {
+        return armTicks;
+    }
+
+    public double getBucketPos() {
+        return bucketPos;
+    }
 }

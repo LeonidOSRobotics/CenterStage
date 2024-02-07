@@ -27,16 +27,10 @@ public class Robot {
     static final double     DRIVE_SPEED             = 0.5;
     static final double     TURN_SPEED              = 1;
 
-    static final double     UNLAUNCHED              =0.25;
-    static final double     LAUNCHED                =0.15;
+    static final double     UNLAUNCHED              = 0.25;
+    static final double     LAUNCHED                = 0.15;
 
-    static final double[]   LOAD                    = {0.0, 0.5};
-    static final double[]   CARRY                   = {0.0, 0.0};
-    static final double[]   PREFLIP                 = {254, 0.8}; //170 DEGREES
-    static final double[]   FLIP                     = {254, 0.5}; //170 DEGREES
-
-
-
+    static ArmBucketPosition armBucketPosition      = ArmBucketPosition.CARRY;
 
     /* local OpMode members.*/
     HardwareMap hwMap = null; //hardware map
@@ -94,11 +88,11 @@ public class Robot {
 
     }
 
+    //General Functions
     private void stopDriveTrain() {
         leftDrive.setPower(0);
         rightDrive.setPower(0);
     }
-
 
 
     //TELE-OP METHODS
