@@ -86,7 +86,7 @@ public class Robot {
 
         intake.setPower(0);
         airplane.setPosition(UNLAUNCHED);
-        bucket.setPosition(0.3);//test reading
+        //bucket.setPosition(0.3);//test reading
 
 
     }

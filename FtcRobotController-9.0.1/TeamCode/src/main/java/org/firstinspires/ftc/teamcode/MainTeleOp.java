@@ -73,7 +73,7 @@ public class MainTeleOp extends LinearOpMode {
 
             //General Arm Movement
             //Might be temporary
-            if (gamepad1.left_bumper) {
+          /*  if (gamepad1.left_bumper) {
                 robot.arm.setPower(0.5);
             }
             else if (gamepad1.right_bumper) {
@@ -81,7 +81,7 @@ public class MainTeleOp extends LinearOpMode {
             }
             else {
                 robot.arm.setPower(0);
-            }
+            }*/
 
             //Arm and Bucket Movement
 
@@ -100,12 +100,12 @@ public class MainTeleOp extends LinearOpMode {
             robot.arm.setTargetPosition(state.getArmTicks());
             robot.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            /*Proportional control
+            //Proportional control
             int error = (state.getArmTicks()) - (robot.arm.getCurrentPosition());
-            double speed = .5 * error; //Kp = 0.5
-            */
+            double speed = .00083 * error; //Kp = 0.5  300
 
-            robot.arm.setPower(.7);
+
+            robot.arm.setPower(speed);
             robot.bucket.setPosition(state.getBucketPos());
 
 
