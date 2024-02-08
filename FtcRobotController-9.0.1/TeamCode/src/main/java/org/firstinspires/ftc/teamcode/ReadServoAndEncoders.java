@@ -38,9 +38,9 @@ public class ReadServoAndEncoders extends LinearOpMode {
             int armPos = robot.arm.getCurrentPosition();
 
 
-            telemetry.addData("Arm", "(%.2f)", armPos);
-            telemetry.addData("Bucket", "(%.2f)", bucketPos);
-            telemetry.addData("Airplane", "(%.2f)", airplanePos);
+            telemetry.addData("Arm"+ armPos, "");
+            telemetry.addData("Bucket" + bucketPos, "");
+            telemetry.addData("Airplane"+  airplanePos, "");
             telemetry.update();
         }
 

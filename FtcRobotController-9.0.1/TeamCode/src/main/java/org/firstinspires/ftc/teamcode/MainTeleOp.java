@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 /*
@@ -24,6 +25,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class MainTeleOp extends LinearOpMode {
 
     Robot robot = new Robot(); // Using the current Robot.java class
+    ArmBucketPosition state = ArmBucketPosition.CARRY;
 
 
     @Override
@@ -36,6 +38,7 @@ public class MainTeleOp extends LinearOpMode {
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+
 
 
 
@@ -81,19 +84,31 @@ public class MainTeleOp extends LinearOpMode {
             }
 
             //Arm and Bucket Movement
+
+            //Set state of the arm:
             if(gamepad2.a){
-                robot.arm.setTargetPosition(ArmBucketPosition.LOAD.getArmTicks());
-                robot.bucket.setPosition(ArmBucketPosition.LOAD.getBucketPos());
+                state = ArmBucketPosition.LOAD;
             }else if(gamepad2.b){
-                robot.arm.setTargetPosition(ArmBucketPosition.CARRY.getArmTicks());
-                robot.bucket.setPosition(ArmBucketPosition.CARRY.getBucketPos());
-            }else if (gamepad2.x){
-                robot.arm.setTargetPosition(ArmBucketPosition.PREFLIP.getArmTicks());
-                robot.bucket.setPosition(ArmBucketPosition.PREFLIP.getBucketPos());
-            }else if (gamepad2.y){
-                robot.arm.setTargetPosition(ArmBucketPosition.FLIP.getArmTicks());
-                robot.bucket.setPosition(ArmBucketPosition.FLIP.getBucketPos());
+                state = ArmBucketPosition.CARRY;
+            }else if(gamepad2.x){
+                state=ArmBucketPosition.PREFLIP;
+            }else if(gamepad2.y){
+                state=ArmBucketPosition.FLIP;
             }
+
+            //Make Movement occur
+            robot.arm.setTargetPosition(state.getArmTicks());
+            robot.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            /*Proportional control
+            int error = (state.getArmTicks()) - (robot.arm.getCurrentPosition());
+            double speed = .5 * error; //Kp = 0.5
+            */
+
+            robot.arm.setPower(.7);
+            robot.bucket.setPosition(state.getBucketPos());
+
+
 
 
             //End Game Functions

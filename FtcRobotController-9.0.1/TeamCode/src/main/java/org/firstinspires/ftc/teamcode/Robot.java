@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -64,13 +65,14 @@ public class Robot {
         //Temporary Directions for drive train, change after testing if needed.
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        arm.setDirection(DcMotor.Direction.REVERSE);
 
 
         // set all motors to zero power
         stopDriveTrain();
 
 
-        // Set all motors to run with encoders.
+        // Set all motors to stop and reset with encoders.
         leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -84,6 +86,7 @@ public class Robot {
 
         intake.setPower(0);
         airplane.setPosition(UNLAUNCHED);
+        bucket.setPosition(0.3);//test reading
 
 
     }
