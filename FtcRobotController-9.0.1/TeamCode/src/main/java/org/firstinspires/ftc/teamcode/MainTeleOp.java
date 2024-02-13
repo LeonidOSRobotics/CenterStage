@@ -26,6 +26,7 @@ public class MainTeleOp extends LinearOpMode {
 
     Robot robot = new Robot(); // Using the current Robot.java class
     ArmBucketPosition state = ArmBucketPosition.CARRY;
+    int stateNum = 0;
 
 
     @Override
@@ -61,11 +62,11 @@ public class MainTeleOp extends LinearOpMode {
             robot.rightDrive.setPower(rightPower);
 
             //Activate Intake
-            if (gamepad1.a) {
-                robot.intake.setPower(1);
+            if (gamepad1.b) {
+                robot.intake.setPower(.8);
             }
-            else if (gamepad1.b) {
-                robot.intake.setPower(-1);
+            else if (gamepad1.a) {
+                robot.intake.setPower(-.8);
             }
             else {
                 robot.intake.setPower(0);
@@ -87,26 +88,48 @@ public class MainTeleOp extends LinearOpMode {
 
             //Set state of the arm:
             if(gamepad2.a){
+                stateNum++;
+                sleep(500);
+                if(stateNum == 7){
+                    stateNum = 0;
+                }
+            }else if( gamepad2.b && stateNum > 0) {
+                stateNum--;
+                sleep(500);
+            }
+            if(stateNum == 0){
                 state = ArmBucketPosition.LOAD;
-            }else if(gamepad2.b){
+            }else if(stateNum == 1){
                 state = ArmBucketPosition.CARRY;
-            }else if(gamepad2.x){
+            }else if(stateNum == 2 || stateNum == 5){
+                state=ArmBucketPosition.TRAVEL;
+            }else if(stateNum == 3){
                 state=ArmBucketPosition.PREFLIP;
-            }else if(gamepad2.y){
+            }else if(stateNum == 4){
                 state=ArmBucketPosition.FLIP;
+            }else if(stateNum == 6){
+                state=ArmBucketPosition.POSTFLIP;
             }
 
+
+
+
+            telemetry.addData("State", state);
+            telemetry.update();
             //Make Movement occur
             robot.arm.setTargetPosition(state.getArmTicks());
             robot.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+
             //Proportional control
             int error = (state.getArmTicks()) - (robot.arm.getCurrentPosition());
-            double speed = .00083 * error; //Kp = 0.5  300
+            double speed = .0009 * error; //Kp = .00083
 
 
-            robot.arm.setPower(speed);
             robot.bucket.setPosition(state.getBucketPos());
+            robot.arm.setPower(speed);
+
+
 
 
 
