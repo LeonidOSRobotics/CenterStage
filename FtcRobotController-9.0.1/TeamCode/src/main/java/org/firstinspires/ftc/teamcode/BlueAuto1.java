@@ -13,6 +13,7 @@ public class BlueAuto1 extends LinearOpMode {
         // create a new robot
         bot = new Robot();
 
+
         bot.init(hardwareMap);
 
         //Send telemetry message to indicate successful Encoder reset
@@ -24,11 +25,23 @@ public class BlueAuto1 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
+        bot.moveArmBucket(true,false); //carry mode
+
         encoderDrive(bot.DRIVE_SPEED, 30, 30, 10);
         encoderDrive(bot.DRIVE_SPEED, -3, -3, 10);
-        encoderDrive(bot.DRIVE_SPEED, -13.23, 13.23, 10);
-        encoderDrive(bot.DRIVE_SPEED, 30, 30, 10);
+        encoderDrive(bot.DRIVE_SPEED, 13.23, -13.23, 10);
+        encoderDrive(bot.DRIVE_SPEED, -30, -30, 10);
+        bot.moveArmBucket(true, false); // travel
+        bot.moveArmBucket(true,false); //preflip
+        sleep(200 );
+        bot.moveArmBucket(true, false); //flip
+        bot.moveArmBucket(true, false); //postflip
+        encoderDrive(bot.DRIVE_SPEED, 8,8,10);
+        encoderDrive(bot.DRIVE_SPEED, 13.23,-13.23,10);
+        encoderDrive(bot.DRIVE_SPEED, 20,20,10);
+        
         }
+
 
     public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
         int newLeftTarget;
