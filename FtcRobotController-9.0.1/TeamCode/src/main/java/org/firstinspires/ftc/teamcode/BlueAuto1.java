@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 
 @Autonomous
-public class TestAutonomous extends LinearOpMode {
+public class BlueAuto1 extends LinearOpMode {
     Robot bot;
     @Override
     public void runOpMode() {
@@ -25,7 +25,9 @@ public class TestAutonomous extends LinearOpMode {
         waitForStart();
 
         encoderDrive(bot.DRIVE_SPEED, 30, 30, 10);
-
+        encoderDrive(bot.DRIVE_SPEED, -3, -3, 10);
+        encoderDrive(bot.DRIVE_SPEED, -13.23, 13.23, 10);
+        encoderDrive(bot.DRIVE_SPEED, 30, 30, 10);
         }
 
     public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
