@@ -31,7 +31,8 @@ public class Robot {
     static final double     UNLAUNCHED              = 0.25;
     static final double     LAUNCHED                = 0.15;
 
-    static ArmBucketPosition armBucketPosition      = ArmBucketPosition.CARRY;
+    ArmBucketPosition state                         = ArmBucketPosition.CARRY;
+    int stateNum                                    = 0;
 
 
     /* local OpMode members.*/
@@ -96,6 +97,49 @@ public class Robot {
     private void stopDriveTrain() {
         leftDrive.setPower(0);
         rightDrive.setPower(0);
+    }
+
+    public void moveArmBucket(boolean progress, boolean regress){
+
+        //Set state of the arm:
+        if(progress){
+            stateNum++;
+            if(stateNum == 7){
+                stateNum = 0;
+            }
+        }else if( regress && stateNum > 0) {
+            stateNum--;
+        }
+        if(stateNum == 0){
+            state = ArmBucketPosition.LOAD;
+        }else if(stateNum == 1){
+            state = ArmBucketPosition.CARRY;
+        }else if(stateNum == 2 || stateNum == 5){
+            state=ArmBucketPosition.TRAVEL;
+        }else if(stateNum == 3){
+            state=ArmBucketPosition.PREFLIP;
+        }else if(stateNum == 4){
+            state=ArmBucketPosition.FLIP;
+        }else if(stateNum == 6){
+            state=ArmBucketPosition.POSTFLIP;
+        }
+
+
+
+
+
+        //Make Movement occur
+        arm.setTargetPosition(state.getArmTicks());
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+
+        //Proportional control
+        int error = (state.getArmTicks()) - (arm.getCurrentPosition());
+        double speed = .0009 * error; //Kp = .00083
+
+
+        bucket.setPosition(state.getBucketPos());
+        arm.setPower(speed);
     }
 
 

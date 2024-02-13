@@ -25,8 +25,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class MainTeleOp extends LinearOpMode {
 
     Robot robot = new Robot(); // Using the current Robot.java class
-    ArmBucketPosition state = ArmBucketPosition.CARRY;
-    int stateNum = 0;
+
 
 
     @Override
@@ -39,7 +38,6 @@ public class MainTeleOp extends LinearOpMode {
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-
 
 
 
@@ -72,67 +70,13 @@ public class MainTeleOp extends LinearOpMode {
                 robot.intake.setPower(0);
             }
 
-            //General Arm Movement
-            //Might be temporary
-          /*  if (gamepad1.left_bumper) {
-                robot.arm.setPower(0.5);
-            }
-            else if (gamepad1.right_bumper) {
-                robot.arm.setPower(-0.5);
-            }
-            else {
-                robot.arm.setPower(0);
-            }*/
-
             //Arm and Bucket Movement
 
-            //Set state of the arm:
-            if(gamepad2.a){
-                stateNum++;
-                sleep(500);
-                if(stateNum == 7){
-                    stateNum = 0;
-                }
-            }else if( gamepad2.b && stateNum > 0) {
-                stateNum--;
-                sleep(500);
-            }
-            if(stateNum == 0){
-                state = ArmBucketPosition.LOAD;
-            }else if(stateNum == 1){
-                state = ArmBucketPosition.CARRY;
-            }else if(stateNum == 2 || stateNum == 5){
-                state=ArmBucketPosition.TRAVEL;
-            }else if(stateNum == 3){
-                state=ArmBucketPosition.PREFLIP;
-            }else if(stateNum == 4){
-                state=ArmBucketPosition.FLIP;
-            }else if(stateNum == 6){
-                state=ArmBucketPosition.POSTFLIP;
-            }
+            robot.moveArmBucket(gamepad2.a, gamepad2.b);
+            sleep(200);
 
-
-
-
-            telemetry.addData("State", state);
+            telemetry.addData("State", robot.state);
             telemetry.update();
-            //Make Movement occur
-            robot.arm.setTargetPosition(state.getArmTicks());
-            robot.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-
-            //Proportional control
-            int error = (state.getArmTicks()) - (robot.arm.getCurrentPosition());
-            double speed = .0009 * error; //Kp = .00083
-
-
-            robot.bucket.setPosition(state.getBucketPos());
-            robot.arm.setPower(speed);
-
-
-
-
-
 
             //End Game Functions
             if(gamepad1.y){
