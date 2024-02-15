@@ -28,6 +28,7 @@ public class MainTeleOp extends LinearOpMode {
 
 
 
+
     @Override
     public void runOpMode() {
 
@@ -48,16 +49,18 @@ public class MainTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Setup a variable for each drive wheel to save power level for telemetry
-            double leftPower;
-            double rightPower;
+            double forward;
+            double leftTurn;
+            double rightTurn;
 
-            leftPower    = gamepad1.left_stick_y ;
-            rightPower   = gamepad1.right_stick_y ;
+            forward = gamepad1.left_stick_y ;
+            leftTurn   = gamepad1.left_trigger * 100;
+            rightTurn = gamepad1.right_trigger * 100;
 
 
             // Send calculated power to wheels
-            robot.leftDrive.setPower(leftPower);
-            robot.rightDrive.setPower(rightPower);
+            robot.leftDrive.setPower(forward + leftTurn - rightTurn);
+            robot.rightDrive.setPower(forward - leftTurn + rightTurn);
 
             //Activate Intake
             if (gamepad1.b) {
@@ -72,7 +75,7 @@ public class MainTeleOp extends LinearOpMode {
 
             //Arm and Bucket Movement
 
-            robot.moveArmBucket(gamepad2.a, gamepad2.b);
+            robot.moveArmBucket(gamepad2.a, gamepad2.b, false);
             sleep(200);
 
             telemetry.addData("State", robot.state);

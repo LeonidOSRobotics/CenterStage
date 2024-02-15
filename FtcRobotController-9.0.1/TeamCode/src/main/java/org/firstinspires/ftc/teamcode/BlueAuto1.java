@@ -26,22 +26,24 @@ public class BlueAuto1 extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        bot.moveArmBucket(true,false); //carry mode
+        bot.moveArmBucket(true,false, true); //carry mode
 
-        encoderDrive(bot.DRIVE_SPEED, -27, -27, 10);
-        encoderDrive(bot.DRIVE_SPEED, 4, 4, 10);
-        encoderDrive(bot.DRIVE_SPEED, -35, 35, 10);//90 degree turn
-        bot.moveArmBucket(true, false); // travel
-        encoderDrive(bot.DRIVE_SPEED, 30, 30, 10);
+        encoderDrive(bot.DRIVE_SPEED, -25, -25, 10);
+        encoderDrive(bot.DRIVE_SPEED, -54, 54, 10);//90 degree turn//35 with omni
+        bot.moveArmBucket(true, false, true); // travel
+        encoderDrive(bot.DRIVE_SPEED, 45, 45, 10);
         sleep(500 );
-        bot.moveArmBucket(true,false); //preflip
+        bot.moveArmBucket(true,false, true); //preflip
         sleep(500 );
-        bot.moveArmBucket(true, false); //flip
+        bot.moveArmBucket(true, false,true); //flip
         sleep(500 );
-        bot.moveArmBucket(true, false); //postflip
+        bot.moveArmBucket(true, false, true); //postflip
+        sleep(500 );
+        bot.moveArmBucket(true, false, true); //postflip
         encoderDrive(bot.DRIVE_SPEED, -8,-8,10);
-        encoderDrive(bot.DRIVE_SPEED, -30,30,10);
-        encoderDrive(bot.DRIVE_SPEED, -20,-20,10);
+        encoderDrive(bot.DRIVE_SPEED, -54,54,10);
+        encoderDrive(bot.DRIVE_SPEED, -15,-15,10);
+
         
         }
 
