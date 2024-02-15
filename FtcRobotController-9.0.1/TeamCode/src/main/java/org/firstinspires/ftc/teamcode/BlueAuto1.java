@@ -17,7 +17,8 @@ public class BlueAuto1 extends LinearOpMode {
         bot.init(hardwareMap);
 
         //Send telemetry message to indicate successful Encoder reset
-      telemetry.addData("Starting at",  "%7d :%7d", bot.leftDrive.getCurrentPosition(),bot.rightDrive.getCurrentPosition());
+        telemetry.addData("Starting at",  "%7d :%7d",
+                bot.leftDrive.getCurrentPosition(),bot.rightDrive.getCurrentPosition());
 
         telemetry.update();
 
@@ -27,18 +28,20 @@ public class BlueAuto1 extends LinearOpMode {
 
         bot.moveArmBucket(true,false); //carry mode
 
-        encoderDrive(bot.DRIVE_SPEED, 30, 30, 10);
-        encoderDrive(bot.DRIVE_SPEED, -3, -3, 10);
-        encoderDrive(bot.DRIVE_SPEED, 13.23, -13.23, 10);
-        encoderDrive(bot.DRIVE_SPEED, -30, -30, 10);
+        encoderDrive(bot.DRIVE_SPEED, -27, -27, 10);
+        encoderDrive(bot.DRIVE_SPEED, 4, 4, 10);
+        encoderDrive(bot.DRIVE_SPEED, -35, 35, 10);//90 degree turn
         bot.moveArmBucket(true, false); // travel
+        encoderDrive(bot.DRIVE_SPEED, 30, 30, 10);
+        sleep(500 );
         bot.moveArmBucket(true,false); //preflip
-        sleep(200 );
+        sleep(500 );
         bot.moveArmBucket(true, false); //flip
+        sleep(500 );
         bot.moveArmBucket(true, false); //postflip
-        encoderDrive(bot.DRIVE_SPEED, 8,8,10);
-        encoderDrive(bot.DRIVE_SPEED, 13.23,-13.23,10);
-        encoderDrive(bot.DRIVE_SPEED, 20,20,10);
+        encoderDrive(bot.DRIVE_SPEED, -8,-8,10);
+        encoderDrive(bot.DRIVE_SPEED, -30,30,10);
+        encoderDrive(bot.DRIVE_SPEED, -20,-20,10);
         
         }
 

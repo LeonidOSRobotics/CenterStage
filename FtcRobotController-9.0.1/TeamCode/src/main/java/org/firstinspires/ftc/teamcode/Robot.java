@@ -25,7 +25,7 @@ public class Robot {
     static final double     WHEEL_DIAMETER_INCHES   = 3.78 ;
     static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV) /
                                                     (WHEEL_DIAMETER_INCHES * 3.1415);
-    static final double     DRIVE_SPEED             = 0.5;
+    static final double     DRIVE_SPEED             = 0.35;
     static final double     TURN_SPEED              = 1;
 
     static final double     UNLAUNCHED              = 0.25;
@@ -135,7 +135,7 @@ public class Robot {
 
         //Proportional control
         int error = (state.getArmTicks()) - (arm.getCurrentPosition());
-        double speed = .0009 * error; //Kp = .00083
+        double speed = .00083 * error; //Kp = .00083
 
 
         bucket.setPosition(state.getBucketPos());
