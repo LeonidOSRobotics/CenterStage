@@ -12,8 +12,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class Robot {
 
     //Declare Actuators
-    float leftDrive = null;
-    float rightDrive = null;
+    DcMotor leftDrive = null;
+    DcMotor rightDrive = null;
     DcMotor arm = null;
     CRServo intake = null;
     Servo bucket = null;
