@@ -49,18 +49,20 @@ public class MainTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Setup a variable for each drive wheel to save power level for telemetry
-            double forward;
-            double leftTurn;
-            double rightTurn;
+          //  double forward;
+          //  double leftTurn;
+           // .. double rightTurn;
 
-            forward = gamepad1.left_stick_y ;
-            leftTurn   = gamepad1.left_trigger * 100;
-            rightTurn = gamepad1.right_trigger * 100;
+           double leftDrive = gamepad1.left_stick_y;
+           double rightDrive = gamepad1.right_stick_y ;
 
+           // forward = gamepad1.left_stick_y ;
+           // leftTurn   = gamepad1.left_trigger * 100;
+            //rightTurn = gamepad1.right_trigger * 100;
 
             // Send calculated power to wheels
-            robot.leftDrive.setPower(forward + leftTurn - rightTurn);
-            robot.rightDrive.setPower(forward - leftTurn + rightTurn);
+           // robot.leftDrive.setPower(forward + leftTurn - rightTurn);
+           // robot.rightDrive.setPower(forward - leftTurn + rightTurn);
 
             //Activate Intake
             if (gamepad1.b) {
