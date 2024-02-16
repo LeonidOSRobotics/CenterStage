@@ -153,7 +153,7 @@ public class Robot {
         }
         bucket.setPosition(state.getBucketPos());
         arm.setPower(speed);
-        if((state.getArmTicks() >= arm.getCurrentPosition()-10 || state.getArmTicks() <= arm.getCurrentPosition() +10 ) &&state.getArmTicks() != arm.getCurrentPosition() && state == ArmBucketPosition.LOAD){
+        if((state.getArmTicks() >= arm.getCurrentPosition()-10 || state.getArmTicks() <= arm.getCurrentPosition() +10 ) &&state.getArmTicks() != arm.getCurrentPosition() && state == ArmBucketPosition.LOAD && intake.getPower() == 0 ){
             intake.setPower(.2);
         }
 

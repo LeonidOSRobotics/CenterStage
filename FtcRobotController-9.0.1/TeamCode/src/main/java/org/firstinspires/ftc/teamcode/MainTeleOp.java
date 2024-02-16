@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.Range;
 
 
 /*
@@ -49,14 +50,28 @@ public class MainTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Setup a variable for each drive wheel to save power level for telemetry
-          //  double forward;
-          //  double leftTurn;
-           // .. double rightTurn;
+          double forward;
+          double leftTurn;
+          double rightTurn;
+          double backwords;
 
-           double leftDrive = gamepad1.left_stick_y;
-           double rightDrive = gamepad1.right_stick_y ;
+           //double leftDrive = gamepad1.left_stick_y;
+           //double rightDrive = gamepad1.right_stick_y;
+           //robot.leftDrive.setPower(leftDrive);
+          //  robot.rightDrive.setPower(rightDrive);
 
-           // forward = gamepad1.left_stick_y ;
+           forward = gamepad1.right_trigger *-1 ;
+           backwords = gamepad1.left_trigger;
+           //double drive = -gamepad1.left_stick_x;
+           double turn  = -gamepad1.left_stick_x;
+           leftTurn = Range.clip(forward + backwords + turn, -.9, .9) ;
+           rightTurn = Range.clip(forward + backwords - turn, -.9, .9) ;
+
+
+            robot.leftDrive.setPower(leftTurn);
+            robot.rightDrive.setPower(rightTurn);
+
+           //forward = gamepad1.left_stick_y ;
            // leftTurn   = gamepad1.left_trigger * 100;
             //rightTurn = gamepad1.right_trigger * 100;
 
@@ -65,10 +80,10 @@ public class MainTeleOp extends LinearOpMode {
            // robot.rightDrive.setPower(forward - leftTurn + rightTurn);
 
             //Activate Intake
-            if (gamepad1.b) {
+            if (gamepad2.x) {
                 robot.intake.setPower(.8);
             }
-            else if (gamepad1.a) {
+            else if (gamepad2.y) {
                 robot.intake.setPower(-.8);
             }
             else {

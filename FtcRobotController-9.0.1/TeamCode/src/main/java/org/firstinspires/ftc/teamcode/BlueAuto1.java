@@ -28,7 +28,7 @@ public class BlueAuto1 extends LinearOpMode {
 
         bot.moveArmBucket(true,false, true); //carry mode
 
-        encoderDrive(bot.DRIVE_SPEED, -25, -25, 10);
+        encoderDrive(bot.DRIVE_SPEED, -27, -27, 10);
         encoderDrive(bot.DRIVE_SPEED, -54, 54, 10);//90 degree turn//35 with omni
         bot.moveArmBucket(true, false, true); // travel
         encoderDrive(bot.DRIVE_SPEED, 45, 45, 10);
