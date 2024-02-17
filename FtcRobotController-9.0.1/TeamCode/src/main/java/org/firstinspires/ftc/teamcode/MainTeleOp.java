@@ -80,10 +80,10 @@ public class MainTeleOp extends LinearOpMode {
            // robot.rightDrive.setPower(forward - leftTurn + rightTurn);
 
             //Activate Intake
-            if (gamepad2.x) {
+            if (gamepad2.left_trigger > 0) {
                 robot.intake.setPower(.8);
             }
-            else if (gamepad2.y) {
+            else if (gamepad2.right_trigger > 0) {
                 robot.intake.setPower(-.8);
             }
             else {
