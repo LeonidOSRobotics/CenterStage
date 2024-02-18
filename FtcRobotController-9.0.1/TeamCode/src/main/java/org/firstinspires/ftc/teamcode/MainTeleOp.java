@@ -50,22 +50,31 @@ public class MainTeleOp extends LinearOpMode {
         while (opModeIsActive()) {
 
             // Setup a variable for each drive wheel to save power level for telemetry
-          double forward;
-          double leftTurn;
-          double rightTurn;
-          double backwords;
+          //double forward;
+          //double leftTurn;
+            // double rightTurn;
+          //double backwords;
 
-           //double leftDrive = gamepad1.left_stick_y;
-           //double rightDrive = gamepad1.right_stick_y;
-           //robot.leftDrive.setPower(leftDrive);
-          //  robot.rightDrive.setPower(rightDrive);
+           double leftTurn = gamepad1.left_stick_y;
+           double rightTurn = gamepad1.right_stick_y;
+            telemetry.addData("Right Bumper", gamepad1.right_bumper);
 
-           forward = gamepad1.right_trigger *-1 ;
-           backwords = gamepad1.left_trigger;
+           if(gamepad1.right_bumper){
+               telemetry.addData("Left", leftTurn/3);
+               robot.leftDrive.setPower(leftTurn/2);
+               robot.rightDrive.setPower(rightTurn/2);
+           }else {
+               telemetry.addData("Left", leftTurn);
+               robot.leftDrive.setPower(leftTurn);
+               robot.rightDrive.setPower(rightTurn);
+           }
+
+           //forward = gamepad1.right_trigger *-1 ;
+           //backwords = gamepad1.left_trigger;
            //double drive = -gamepad1.left_stick_x;
-           double turn  = -gamepad1.left_stick_x;
-           leftTurn = Range.clip(forward + backwords + turn, -.9, .9) ;
-           rightTurn = Range.clip(forward + backwords - turn, -.9, .9) ;
+           //double turn  = -gamepad1.left_stick_x;
+           //leftTurn = Range.clip(forward + backwords + turn, -.9, .9) ;
+           //rightTurn = Range.clip(forward + backwords - turn, -.9, .9) ;
 
 
             robot.leftDrive.setPower(leftTurn);

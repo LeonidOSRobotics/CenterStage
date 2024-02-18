@@ -8,8 +8,8 @@ public enum ArmBucketPosition {
     LOAD(0, 0.6),
     CARRY(30, 0.74),
     TRAVEL(140, 0.45),
-    PREFLIP(650, 0.05),
-    FLIP(650, 0.4),
+    PREFLIP(685, 0.05),
+    FLIP(685, 0.4),
     POSTFLIP(0, 0.8);
 
     private final int armTicks;

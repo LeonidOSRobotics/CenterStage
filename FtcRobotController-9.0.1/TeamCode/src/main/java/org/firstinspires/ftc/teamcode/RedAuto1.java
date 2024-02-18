@@ -32,13 +32,13 @@ public class RedAuto1 extends LinearOpMode {
         encoderDrive(bot.DRIVE_SPEED, 54, -54, 10);//90 degree turn//35 with omni
         bot.moveArmBucket(true, false, true); // travel
         encoderDrive(bot.DRIVE_SPEED, 45, 45, 10);
-        sleep(500 );
+        sleep(800 );
         bot.moveArmBucket(true,false, true); //preflip
-        sleep(500 );
+        sleep(800 );
         bot.moveArmBucket(true, false,true); //flip
-        sleep(500 );
+        sleep(800 );
         bot.moveArmBucket(true, false, true); //postflip
-        sleep(500 );
+        sleep(800 );
         bot.moveArmBucket(true, false, true); //postflip
         encoderDrive(bot.DRIVE_SPEED, -8,-8,10);
         encoderDrive(bot.DRIVE_SPEED, 54,-54,10);
